@@ -25,11 +25,10 @@ public class TasksController {
     @ResponseBody
     public Iterable<Tasks> retrieveTasks(){
 
-        System.out.println("Po hin qetu");
+
 
         Iterable<Tasks> taskat = taskRepo.findAll();
 
-        System.out.println("TASKAT: " + taskat);
 
         return taskRepo.findAll();
     }
@@ -37,15 +36,11 @@ public class TasksController {
     @PostMapping(path="/add")
     public @ResponseBody String addTask(@RequestParam Map<String,Object> newTask){
 
-        System.out.println(newTask);
-
         Tasks task = new Tasks();
 
         task.setTitle(newTask.get("title").toString());
 
         task.setDescription(newTask.get("description").toString());
-
-        System.out.println("TASK : " + task);
 
         try{
             taskRepo.save(task);
@@ -54,5 +49,6 @@ public class TasksController {
         }catch(Exception e){
             return e.getMessage();
         }
+
     }
 }
